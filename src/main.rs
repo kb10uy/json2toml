@@ -28,10 +28,6 @@ impl<T, E: Display> UnwrapOrExit for Result<T, E> {
 
 fn main() {
     let arguments: Vec<_> = args().collect();
-    if arguments.len() <= 2 {
-        eprintln!("Usage: json2toml <input file> <output file>");
-        exit(1);
-    }
 
     let mut input_file: BufReader<Box<dyn Read>> = BufReader::new(match arguments.get(1) {
         Some(filename) => Box::new(File::open(filename).unwrap_or_exit("File error")),
