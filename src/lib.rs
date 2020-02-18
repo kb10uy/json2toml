@@ -28,6 +28,7 @@ impl<T, E: Display> UnwrapOrExit for Result<T, E> {
 /// Obtains `dyn Write` and `dyn Read` based on commandline argument.
 pub fn inout_from_args() -> Result<(Box<dyn Write>, Box<dyn Read>), IoError> {
     let mut arguments = args();
+    arguments.next();
 
     let input: Box<dyn Read> = if let Some(input_filename) = arguments.next() {
         Box::new(File::open(input_filename)?)
